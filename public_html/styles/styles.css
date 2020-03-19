@@ -11,9 +11,37 @@ body {
     background: #f0f2f5;
     margin: 0;
     padding: 0;
+    height: 100%;
     font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+}
+.content {
+    min-height: 100%;  /* Fallback for browsers do NOT support vh unit */
+    min-height: 100vh; /* These two lines are counted as one :-)       */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+}
+.card-body-container {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+}
+.dna-form-container{
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    width: 100px; 
+}
+.dna-details-container{
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    width: 70px; 
 }
 .dna {
     display: -ms-flexbox;
@@ -21,27 +49,27 @@ body {
     -ms-flex-direction: column;
     flex-direction: column;
     width: 70px; }
-.dna__level {
+.level {
     cursor: pointer;
     padding: 5px 0px;
     position: relative;
     width: 100%; }
-.dna__level-circle {
+.nucleotide {
     border-radius: 50%;
     height: 7px;
     position: absolute;
     top: calc(50% - 5px);
     width: 7px; }
-.dna__level-circle:nth-child(1) {
-    -webkit-animation: anim_a 4s infinite ease-in-out;
-    animation: anim_a 4s infinite ease-in-out;
+.nucleotide:nth-child(1) {
+    -webkit-animation: animation_nucleotide_helix_a 4s infinite ease-in-out;
+    animation: animation_nucleotide_helix_a 4s infinite ease-in-out;
     background-color: green;
     left: 0;
     -webkit-animation-play-state: paused;
     animation-play-state: paused; }
-.dna__level-circle:nth-child(2) {
-    -webkit-animation: anim_b 4s infinite ease-in-out;
-    animation: anim_b 4s infinite ease-in-out;
+.nucleotide:nth-child(2) {
+    -webkit-animation: animation_nucleotide_helix_b 4s infinite ease-in-out;
+    animation: animation_nucleotide_helix_b 4s infinite ease-in-out;
     background-color: green;
     left: calc(100% - 7px);
     -webkit-transform: scale(1.5);
@@ -49,9 +77,9 @@ body {
     transform: scale(1.5);
     -webkit-animation-play-state: paused;
     animation-play-state: paused; }
-.dna__level-line {
-    -webkit-animation: rotate-strain;
-    animation: rotate-strain;
+.connection {
+    -webkit-animation: rotate_connection;
+    animation: rotate_connection;
     -webkit-animation-duration: 4s;
     animation-duration: 4s;
     -webkit-animation-iteration-count: infinite;
@@ -64,17 +92,17 @@ body {
     z-index: 0;
     -webkit-animation-play-state: paused;
     animation-play-state: paused; }
-.dna:hover .dna__level-circle:nth-child(1) {
+.dna:hover .nucleotide:nth-child(1) {
     -webkit-animation-play-state: running;
     animation-play-state: running; }
-.dna:hover .dna__level-circle:nth-child(2) {
+.dna:hover .nucleotide:nth-child(2) {
     -webkit-animation-play-state: running;
     animation-play-state: running; }
-.dna:hover .dna__level-line {
+.dna:hover .connection {
     -webkit-animation-play-state: running;
     animation-play-state: running; }
 
-@-webkit-keyframes anim_a {
+@-webkit-keyframes animation_nucleotide_helix_a {
     0% {
         left: 0;
         z-index: 50; }
@@ -93,7 +121,7 @@ body {
         left: 0;
         z-index: 3; } }
 
-@keyframes anim_a {
+@keyframes animation_nucleotide_helix_a {
     0% {
         left: 0;
         z-index: 50; }
@@ -112,7 +140,7 @@ body {
         left: 0;
         z-index: 3; } }
 
-@-webkit-keyframes anim_b {
+@-webkit-keyframes animation_nucleotide_helix_b {
     0% {
         left: 63px;
         z-index: 2; }
@@ -131,7 +159,7 @@ body {
         left: 63px;
         z-index: 1; } }
 
-@keyframes anim_b {
+@keyframes animation_nucleotide_helix_b {
     0% {
         left: 63px;
         z-index: 2; }
@@ -150,7 +178,7 @@ body {
         left: 63px;
         z-index: 1; } }
 
-@-webkit-keyframes rotate-strain {
+@-webkit-keyframes rotate_connection {
     0% {
         -webkit-transform: scaleX(1);
         transform: scaleX(1); }
@@ -167,7 +195,7 @@ body {
         -webkit-transform: scaleX(1);
         transform: scaleX(1); } }
 
-@keyframes rotate-strain {
+@keyframes rotate_connection {
     0% {
         -webkit-transform: scaleX(1);
         transform: scaleX(1); }
