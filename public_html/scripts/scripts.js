@@ -56,13 +56,9 @@ $(document).ready(function () {
 
         elementsToHighlight.each(function() {
             if ($(this)[0].className === "connection") {
-                $(this).css("-webkit-box-shadow", "0px 0px 0px 1px " + rgbaColor);
-                $(this).css("-moz-box-shadow", "0px 0px 0px 1px " + rgbaColor);
-                $(this).css("box-shadow", "0px 0px 0px 1px " + rgbaColor);
-            } else {
-                $(this).css("-webkit-box-shadow", "0px 0px 0px 0.8px " + rgbaColor);
-                $(this).css("-moz-box-shadow", "0px 0px 0px 0.8px " + rgbaColor);
-                $(this).css("box-shadow", "0px 0px 0px 0.8px " + rgbaColor);
+                $(this).css("-webkit-box-shadow", "0px 0px 0px 1px " + rgbaConnectionColor);
+                $(this).css("-moz-box-shadow", "0px 0px 0px 1px " + rgbaConnectionColor);
+                $(this).css("box-shadow", "0px 0px 0px 1px " + rgbaConnectionColor);
             }
 
         });
