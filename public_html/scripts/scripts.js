@@ -7,8 +7,9 @@ $(document).ready(function () {
 
     var delay = 0;
     var colors = ["rgb(78, 91, 101)", "rgb(153, 90, 230)", "rgb(25, 118, 210)",
-                "rgb(0, 131, 143)", "rgb(245, 127, 23)", "rgb(255, 112, 67 )", 
+                "rgb(0, 131, 143)", "rgb(245, 127, 23)", "rgb(255, 112, 67)",
                 "rgb(109, 76, 65)", "rgb(69, 90, 100)"];
+    var elementsToHighlight = [];
 
     init();
 
@@ -32,8 +33,8 @@ $(document).ready(function () {
         dna_chain.append(generate_level(delay, color));
     }
 
-    function getColor() {
-
+    function getLevelsWithColor(color) {
+        return $('div[style*="background-color: ' + color + ';"]');
     }
 
     function generate_level(delay, color) {
@@ -46,4 +47,30 @@ $(document).ready(function () {
         level.append(connection);
         return level;
     }
+
+    $(".level").hover(function(){
+        var color = $(this).find(">:first-child").css("background-color");
+        elementsToHighlight = getLevelsWithColor(color);
+        var rgbaColor = color.replace(')', ', 0.6)').replace('rgb', 'rgba');
+        var rgbaConnectionColor = color.replace(')', ', 1)').replace('rgb', 'rgba');
+
+        elementsToHighlight.each(function() {
+            if ($(this)[0].className === "connection") {
+                $(this).css("-webkit-box-shadow", "0px 0px 0px 1px " + rgbaColor);
+                $(this).css("-moz-box-shadow", "0px 0px 0px 1px " + rgbaColor);
+                $(this).css("box-shadow", "0px 0px 0px 1px " + rgbaColor);
+            } else {
+                $(this).css("-webkit-box-shadow", "0px 0px 0px 0.8px " + rgbaColor);
+                $(this).css("-moz-box-shadow", "0px 0px 0px 0.8px " + rgbaColor);
+                $(this).css("box-shadow", "0px 0px 0px 0.8px " + rgbaColor);
+            }
+
+        });
+    }, function(){
+        elementsToHighlight.each(function() {
+                    $(this).css("-webkit-box-shadow", "none");
+                    $(this).css("-moz-box-shadow", "none");
+                    $(this).css("box-shadow", "none");
+                });
+    });
 });
