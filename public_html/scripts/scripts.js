@@ -7,9 +7,10 @@ $(document).ready(function () {
 
     var delay = 0;
     var colors = ["rgb(78, 91, 101)", "rgb(153, 90, 230)", "rgb(25, 118, 210)",
-                "rgb(0, 131, 143)", "rgb(245, 127, 23)", "rgb(255, 112, 67)",
-                "rgb(109, 76, 65)", "rgb(69, 90, 100)"];
+        "rgb(0, 131, 143)", "rgb(245, 127, 23)", "rgb(255, 112, 67)",
+        "rgb(109, 76, 65)", "rgb(69, 90, 100)"];
     var elementsToHighlight = [];
+    var levelsGroups = [];
 
     init();
 
@@ -17,16 +18,27 @@ $(document).ready(function () {
         var indexColor = 0;
         var dna_chain = $('#dna_chain');
 
-        for (var i = 0; i < 40; i++) {
+        for (var i = 1; i <= 40; i++) {
             addLevel(dna_chain, Math.round((delay -= 0.2 + Number.EPSILON) * 100) / 100, colors[indexColor]);
-            if (i % 5 == 0 && i != 0){
-                indexColor ++;
+            if (i % 5 === 0) {
+                indexColor++;
             }
         }
+        levelsGroups = getGroups();
     }
 
-    function changeColor() {
-
+    function getGroups() {
+        var levels = $('.level');
+        var groups = [];
+        var group = [];
+        $.each(levels, function (index, level) {
+            group.push(level);
+            if ((index + 1) % 5 === 0) {
+                groups.push(group);
+                group = [];
+            }
+        });
+        return groups;
     }
 
     function addLevel(dna_chain, delay, color) {
@@ -34,7 +46,7 @@ $(document).ready(function () {
     }
 
     function getLevelsWithColor(color) {
-        return $('div[style*="background-color: ' + color + ';"]');
+        return $('div.connection[style*="background-color: ' + color + ';"]');
     }
 
     function generate_level(delay, color) {
@@ -48,25 +60,48 @@ $(document).ready(function () {
         return level;
     }
 
-    $(".level").hover(function(){
+    $(".level").hover(function () {
+        rotateColors(levelsGroups);
         var color = $(this).find(">:first-child").css("background-color");
         elementsToHighlight = getLevelsWithColor(color);
         var rgbaColor = color.replace(')', ', 0.6)').replace('rgb', 'rgba');
         var rgbaConnectionColor = color.replace(')', ', 1)').replace('rgb', 'rgba');
 
-        elementsToHighlight.each(function() {
-            if ($(this)[0].className === "connection") {
-                $(this).css("-webkit-box-shadow", "0px 0px 0px 1px " + rgbaConnectionColor);
-                $(this).css("-moz-box-shadow", "0px 0px 0px 1px " + rgbaConnectionColor);
-                $(this).css("box-shadow", "0px 0px 0px 1px " + rgbaConnectionColor);
-            }
+        elementsToHighlight.each(function () {
+            $(this).css("-webkit-box-shadow", "0px 0px 0px 1px " + rgbaConnectionColor);
+            $(this).css("-moz-box-shadow", "0px 0px 0px 1px " + rgbaConnectionColor);
+            $(this).css("box-shadow", "0px 0px 0px 1px " + rgbaConnectionColor);
 
         });
-    }, function(){
-        elementsToHighlight.each(function() {
-                    $(this).css("-webkit-box-shadow", "none");
-                    $(this).css("-moz-box-shadow", "none");
-                    $(this).css("box-shadow", "none");
-                });
+    }, function () {
+        elementsToHighlight.each(function () {
+            $(this).css("-webkit-box-shadow", "none");
+            $(this).css("-moz-box-shadow", "none");
+            $(this).css("box-shadow", "none");
+        });
     });
+
+//    $("#dna_chain").hover(function () {
+//        rotateColors(levelsGroups);
+//    });
+    
+    function rotateColors(levelsGroups) {
+        $.each(levelsGroups, function (i, group) {
+            var firstLevel = group.shift();
+            if (i == 0) {
+                setElementColor(firstLevel, colors[levelsGroups.length - 1]);
+                levelsGroups[levelsGroups.length - 1].push(firstLevel);
+            } else {
+                setElementColor(firstLevel, colors[i - 1]);
+                levelsGroups[i - 1].push(firstLevel);
+            }
+        });
+    }
+    
+    function setElementColor(element, color) {
+        var childrens = element.children;
+        $.each(childrens, function (index, element) {
+            element.style.backgroundColor = color;
+        });
+    }
 });
