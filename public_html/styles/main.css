@@ -1,0 +1,200 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/*
+    Created on : Mar 18, 2020, 2:16:34 PM
+    Author     : rolando.fuentes
+*/
+
+.dna {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    width: 70px;
+    margin-left: 40px;
+    margin-right: 40px;
+}
+
+.level {
+    cursor: pointer;
+    padding: 5px 0px;
+    position: relative;
+    width: 100%;
+}
+
+.nucleotide {
+    border-radius: 50%;
+    height: 7px;
+    position: absolute;
+    top: calc(50% - 4px);
+    width: 7px;
+}
+
+.nucleotide:nth-child(1) {
+    -webkit-animation: animation_nucleotide_helix_a 4s infinite ease-in-out;
+    animation: animation_nucleotide_helix_a 4s infinite ease-in-out;
+    left: 0;
+    -webkit-animation-play-state: paused;
+    animation-play-state: paused;
+}
+
+.nucleotide:nth-child(2) {
+    -webkit-animation: animation_nucleotide_helix_b 4s infinite ease-in-out;
+    animation: animation_nucleotide_helix_b 4s infinite ease-in-out;
+    left: calc(100% - 3px);
+    -webkit-transform: scale(1.5);
+    -ms-transform: scale(1.5);
+    transform: scale(1.5);
+    -webkit-animation-play-state: paused;
+    animation-play-state: paused;
+}
+
+.connection {
+    -webkit-animation: rotate_connection;
+    animation: rotate_connection;
+    -webkit-animation-duration: 4s;
+    animation-duration: 4s;
+    -webkit-animation-iteration-count: infinite;
+    animation-iteration-count: infinite;
+    -webkit-animation-timing-function: linear;
+    animation-timing-function: linear;
+    height: 1px;
+    position: relative;
+    z-index: 0;
+    -webkit-animation-play-state: paused;
+    animation-play-state: paused;
+}
+
+.dna:hover .nucleotide:nth-child(1) {
+    -webkit-animation-play-state: running;
+    animation-play-state: running;
+}
+
+.dna:hover .nucleotide:nth-child(2) {
+    -webkit-animation-play-state: running;
+    animation-play-state: running;
+}
+
+.dna:hover .connection {
+    -webkit-animation-play-state: running;
+    animation-play-state: running;
+}
+
+@-webkit-keyframes animation_nucleotide_helix_a {
+    0% {
+        left: 0;
+        z-index: 50; }
+    20% {
+        -webkit-transform: scale(1.5);
+        transform: scale(1.5); }
+    50% {
+        left: 63px; }
+    50.1% {
+        z-index: 1; }
+    75% {
+        -webkit-transform: scale(0.8);
+        transform: scale(0.8);
+        z-index: 1; }
+    100% {
+        left: 0;
+        z-index: 3; }
+}
+
+@keyframes animation_nucleotide_helix_a {
+    0% {
+        left: 0;
+        z-index: 50; }
+    20% {
+        -webkit-transform: scale(1.5);
+        transform: scale(1.5); }
+    50% {
+        left: 63px; }
+    50.1% {
+        z-index: 1; }
+    75% {
+        -webkit-transform: scale(0.8);
+        transform: scale(0.8);
+        z-index: 1; }
+    100% {
+        left: 0;
+        z-index: 3; }
+}
+
+@-webkit-keyframes animation_nucleotide_helix_b {
+    0% {
+        left: 63px;
+        z-index: 2; }
+    25% {
+        -webkit-transform: scale(0.8);
+        transform: scale(0.8); }
+    50% {
+        left: 0; }
+    50.1% {
+        z-index: 3; }
+    80% {
+        -webkit-transform: scale(1.5);
+        transform: scale(1.5);
+        z-index: 3; }
+    100% {
+        left: 63px;
+        z-index: 1; }
+}
+
+@keyframes animation_nucleotide_helix_b {
+    0% {
+        left: 63px;
+        z-index: 2; }
+    25% {
+        -webkit-transform: scale(0.8);
+        transform: scale(0.8); }
+    50% {
+        left: 0; }
+    50.1% {
+        z-index: 3; }
+    80% {
+        -webkit-transform: scale(1.5);
+        transform: scale(1.5);
+        z-index: 3; }
+    100% {
+        left: 63px;
+        z-index: 1; }
+}
+
+@-webkit-keyframes rotate_connection {
+    0% {
+        -webkit-transform: scaleX(1);
+        transform: scaleX(1); }
+    25% {
+        -webkit-transform: scaleX(0.12);
+        transform: scaleX(0.12); }
+    50% {
+        -webkit-transform: scaleX(1);
+        transform: scaleX(1); }
+    75% {
+        -webkit-transform: scaleX(0.12);
+        transform: scaleX(0.12); }
+    100% {
+        -webkit-transform: scaleX(1);
+        transform: scaleX(1); }
+}
+
+@keyframes rotate_connection {
+    0% {
+        -webkit-transform: scaleX(1);
+        transform: scaleX(1); }
+    25% {
+        -webkit-transform: scaleX(0.12);
+        transform: scaleX(0.12); }
+    50% {
+        -webkit-transform: scaleX(1);
+        transform: scaleX(1); }
+    75% {
+        -webkit-transform: scaleX(0.12);
+        transform: scaleX(0.12); }
+    100% {
+        -webkit-transform: scaleX(1);
+        transform: scaleX(1); }
+}
